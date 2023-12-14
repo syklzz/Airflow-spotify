@@ -17,7 +17,7 @@ with DAG(
         schedule=timedelta(days=1),
         start_date=datetime(2024, 1, 1),
         catchup=False,
-        tags=["simple_spotify"]
+        tags=["simple_spotify", '2mb_dataset']
 ) as dag:
     t1 = PythonOperator(
         task_id='t1',

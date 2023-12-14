@@ -4,6 +4,8 @@ LOW = 0
 MIDDLE = 1
 HIGH = 2
 COLUMN = 'loudness'
+# data_path = '../data/spotify_songs.csv'
+data_path = 'Airflow-spotify/data/dataset_2mb.csv'
 
 
 def run_calculate_loudness_ranges_etl():
@@ -12,7 +14,7 @@ def run_calculate_loudness_ranges_etl():
 
 
 def calculate_loudness_ranges():
-    df = pd.read_csv('../data/spotify_songs.csv')
+    df = pd.read_csv(data_path)
     df = df.sort_values(by=COLUMN)
     x0 = df[COLUMN].min()
     x3 = df[COLUMN].max()
@@ -33,7 +35,7 @@ def run_count_genres_within_loudness_range_etl(loudness_range):
 
 
 def count_genres_within_loudness_range(loudness_range, loudness_ranges):
-    df = pd.read_csv('../data/spotify_songs.csv')
+    df = pd.read_csv(data_path)
     if loudness_range == LOW:
         min_threshold = loudness_ranges['x0'].values[0]
         max_threshold = loudness_ranges['x1'].values[0]
