@@ -6,7 +6,7 @@ HIGH = 2
 COLUMN = 'loudness'
 
 
-def calculate_loudness_ranges_etl():
+def run_calculate_loudness_ranges_etl():
     df = calculate_loudness_ranges()
     df.to_csv('../data/ranges.csv', index=False)
 
@@ -21,7 +21,7 @@ def calculate_loudness_ranges():
     return pd.DataFrame({'x0': [x0], 'x1': [x1], 'x2': [x2], 'x3': [x3]})
 
 
-def count_genres_within_loudness_range_etl(loudness_range):
+def run_count_genres_within_loudness_range_etl(loudness_range):
     loudness_ranges = pd.read_csv('../data/ranges.csv')
     df = count_genres_within_loudness_range(loudness_range, loudness_ranges)
     if loudness_range == LOW:
@@ -47,14 +47,14 @@ def count_genres_within_loudness_range(loudness_range, loudness_ranges):
     return df.groupby('playlist_genre').size().reset_index(name=f'count_{loudness_range}')
 
 
-def compare_genres_count_for_loudness_ranges_etl():
+def run_compare_genres_count_for_loudness_ranges_etl():
     low_df = pd.read_csv('../data/low_group.csv')
     middle_df = pd.read_csv('../data/middle_group.csv')
     high_df = pd.read_csv('../data/high_group.csv')
     compare_genres_count_loudness_ranges(low_df, middle_df, high_df)
 
 
-def simple_compare_genres_count_for_loudness_ranges_etl():
+def run_simple_compare_genres_count_for_loudness_ranges_etl():
     loudness_ranges = calculate_loudness_ranges()
     low_df = count_genres_within_loudness_range(LOW, loudness_ranges)
     middle_df = count_genres_within_loudness_range(MIDDLE, loudness_ranges)
@@ -66,3 +66,7 @@ def compare_genres_count_loudness_ranges(low_df, middle_df, high_df):
     df = pd.merge(low_df, middle_df, on='playlist_genre', how='outer').fillna(0)
     df = pd.merge(df, high_df, on='playlist_genre', how='outer').fillna(0)
     df.to_csv('../data/merged.csv', index=False)
+
+
+def run_end_etl():
+    print("Success!")
