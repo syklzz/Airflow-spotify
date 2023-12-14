@@ -6,8 +6,12 @@ MIDDLE = 1
 HIGH = 2
 BUCKET_COL = 'loudness'
 GROUP_COL = 'track_genre'
-DB_LOCATION = '/Users/aszynali/my_workspace/Airflow-spotify/spotify.db'
-DATA_PATH = '/Users/aszynali/my_workspace/Airflow-spotify/data/spotify_songs.csv'
+
+# DB_LOCATION = '/Users/aszynali/my_workspace/Airflow-spotify/spotify.db'
+# DATA_PATH = '/Users/aszynali/my_workspace/Airflow-spotify/data/spotify_songs.csv'
+
+DB_LOCATION = '/home/ewier/Desktop/adzd_project/spotify.db'
+DATA_PATH = '/home/ewier/Desktop/adzd_project/Airflow-spotify/data/dataset_2mb.csv'
 
 
 def save_data(df, name):
