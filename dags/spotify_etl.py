@@ -11,7 +11,8 @@ GROUP_COL = 'track_genre'
 # DATA_PATH = '/Users/aszynali/my_workspace/Airflow-spotify/data/spotify_songs.csv'
 
 DB_LOCATION = '/home/ewier/Desktop/adzd_project/spotify.db'
-DATA_PATH = '/home/ewier/Desktop/adzd_project/Airflow-spotify/data/dataset_2mb.csv'
+# DATA_PATH = '/home/ewier/Desktop/adzd_project/Airflow-spotify/data/dataset_2mb.csv'
+DATA_PATH = '/home/ewier/Desktop/adzd_project/Airflow-spotify/data/dataset_large.csv'  # 1.87Gb
 
 
 def save_data(df, name):
