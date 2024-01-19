@@ -8,7 +8,7 @@ BUCKET_COL = 'loudness'
 GROUP_COL = 'track_genre'
 
 DB_LOCATION = '/Users/aszynali/my_workspace/Airflow-spotify/spotify.db'
-DATA_PATH = '/Users/aszynali/my_workspace/Airflow-spotify/data/spotify_songs.csv'
+DATA_PATH = '/Users/aszynali/my_workspace/Airflow-spotify/data/spotify_songs_large.csv'
 
 # DB_LOCATION = '/home/ewier/Desktop/adzd_project/spotify.db'
 # DATA_PATH = '/home/ewier/Desktop/adzd_project/Airflow-spotify/data/dataset_2mb.csv'
@@ -99,3 +99,7 @@ def compare_genres_count_loudness_ranges(low_df, middle_df, high_df, name='resul
     conn = sqlite3.connect(DB_LOCATION)
     df.to_sql(name=name, con=conn, if_exists='replace')
     conn.close()
+
+
+if __name__ == "__main__":
+    run_simple_compare_result_for_bucket_ranges_etl()

@@ -2,11 +2,12 @@ from datetime import datetime, timedelta
 from airflow import DAG
 from airflow.operators.python import PythonOperator
 
-from spotify_etl import HIGH, run_compare_result_for_bucket_ranges_etl, \
-    run_count_within_bucket_range_etl, run_calculate_bucket_ranges_etl, MIDDLE, LOW, run_read_data_etl
+from spotify_etl import run_read_data_etl, \
+    run_compare_result_for_bucket_ranges_etl, run_count_within_bucket_range_etl, MIDDLE, HIGH, LOW, \
+    run_calculate_bucket_ranges_etl
 
 with DAG(
-        "spotify_dag",
+        "sequential_spotify_dag_large",
         default_args={
             "depends_on_past": False,
             "email": ["airflow@example.com"],
@@ -19,7 +20,7 @@ with DAG(
         schedule=timedelta(days=1),
         start_date=datetime(2021, 1, 1),
         catchup=False,
-        tags=["spotify", '2mb_dataset'],
+        tags=["sequential"],
 ) as dag:
     t0 = PythonOperator(
         task_id='t0',
@@ -55,4 +56,4 @@ with DAG(
         dag=dag,
     )
 
-    t0 >> t1 >> [t2, t3, t4] >> t5
+    t0 >> t1 >> t2 >> t3 >> t4 >> t5
